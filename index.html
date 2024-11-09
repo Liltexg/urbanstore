@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UrbanLuxe Apparel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure the body takes the full height */
+            overflow-x: hidden;
+        }
+        header {
+            background-color: #fff;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        nav {
+            display: flex; /* Ensure nav items are in a row */
+            align-items: center; /* Center items vertically */
+            justify-content: space-between; /* Space between menu and icons */
+        }
+        .nav-icons {
+            display: flex; /* Align icons in a row */
+            margin-left: auto; /* Push icons to the right */
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #d4af37;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
+        /* Parallax Effect */
+        .hero {
+            background: url('pexels-ron-lach-8311882.jpg') center/cover no-repeat;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            background-attachment: fixed;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+        }
+        .hero p {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+        .products-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .product-fullscreen {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            color: #fff;
+            flex-direction: column;
+            text-align: center;
+        }
+        .product-fullscreen h2 {
+            font-size: 3rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1rem;
+        }
+        .product-fullscreen p {
+            font-size: 1.5rem;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            margin-bottom: 1rem;
+        }
+        .product-fullscreen:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .cta-button {
+            background-color: #d4af37;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #b89a2d;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            margin-top: 2rem;
+            font-size: 1rem;
+            border-top: 1px solid #444;
+            flex-shrink: 0; /* Prevent footer from shrinking */
+        }
+        footer p {
+            margin: 0;
+        }
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            .product-fullscreen h2 {
+                font-size: 2.5rem;
+            }
+            .product-fullscreen p {
+                font-size: 1.2rem;
+            }
+        }
+        /* Mobile Menu Styles */
+        .menu {
+            display: none; /* Hide menu by default */
+            flex-direction: column; /* Stack items vertically */
+            position: absolute; /* Position it absolutely */
+            top: 100%; /* Position below the header */
+            left: 0;
+            background-color: #fff; /* Background color */
+            width: 100%; /* Full width */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+        }
+        .menu.active {
+            display: flex; /* Show menu when active */
+        }
+        .menu-toggle {
+            display: none; /* Hide toggle button by default */
+            font-size: 1.5rem; /* Increase size */
+            background: none; /* No background */
+            border: none; /* No border */
+            cursor: pointer; /* Pointer cursor */
+        }
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 768px) {
+            nav ul {
+                display: none; /* Hide default menu */
+            }
+            .menu-toggle {
+                display: block; /* Show toggle button */
+            }
+        }
+        .cart-icon {
+            background: none; /* No background */
+            border: none; /* No border */
+            font-size: 1.5rem; /* Icon size */
+            cursor: pointer; /* Pointer cursor */
+            margin-left: 1rem; /* Space between menu and cart icon */
+        }
+    </style>
+    <script>
+        // Toggle menu visibility on mobile
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('active');
+        });
+    </script>
+</head>
+<body>
+
+<header>
+    <div class="logo">UrbanLuxe</div>
+    <nav>
+        <ul class="menu">
+            <li><a href="#women">Women</a></li>
+            <li><a href="#men">Men</a></li>
+            <li><a href="#kids">Kids</a></li>
+            <li><a href="#sports">Sports</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#beauty">Beauty</a></li>
+            <li><a href="#jewellery">Jewellery</a></li>
+            <li><a href="#tech">Tech</a></li>
+            <li><a href="#deals">Deals</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button class="menu-toggle">☰</button>
+            <button class="cart-icon" aria-label="Shopping Cart">🛒</button>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <div>
+        <h1>UrbanLuxe Apparel</h1>
+        <p>Where Urban Meets Luxe - Discover Your Style</p>
+    </div>
+</section>
+
+<section class="products-section">
+    <div class="product-fullscreen" style="background-image: url('pexels-k3ithvision-3854982.jpg');">
+        <div>
+            <h2>Urban Style Shirt</h2>
+            <p>$25.00</p>
+            <button class="cta-button">Buy Now</button>
+        </div>
+    </div>
+    <div class="product-fullscreen" style="background-image: url('pexels-manny-rodriguez-184413994-24244062.jpg');">
+        <div>
+            <h2>Comfort Fit Hoodie</h2>
+            <p>$45.00</p>
+            <button class="cta-button">Buy Now</button>
+        </div>
+    </div>
+    <div class="product-fullscreen" style="background-image: url('pexels-amirali-shaghaghi-479660570-26528129.jpg');">
+        <div>
+            <h2> Trending Jeans Ladies</h2>
+            <p>$65.00</p>
+            <button class="cta-button">Buy Now</button>
+        </div>
+    </div>
+    <div class="product-fullscreen" style="background-image: url('pexels-suedadilli-20232807.jpg');">
+        <div>
+            <h2>Trendy Casual Pants Men</h2>
+            <p>$40.00</p>
+            <button class="cta-button">Buy Now</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 UrbanLuxe Apparel. All Rights Reserved.</p>
+    <p>Follow us on social media!</p>
+</footer>
+
+</body>
+</html>
